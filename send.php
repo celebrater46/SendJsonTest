@@ -2,27 +2,28 @@
 
 // 送信データ
 $data = [
-    "hogeKey1" => "hogeValue1",
-    "hogeKey2" => "hogeValue2",
+    "name" => "hideru",
+    "age" => "28",
 ];
 
-// Json に変換する
+// JSONに変換
 $data = json_encode($data);
 
 // ストリームコンテクストオプションを作成し、HTTPコンテクストオプションをセット
 $options = [
-    "http" => [
-        "method" => "POST",
-        "header" => "Content-type:application/json; charset=UTF-8",
-        "content" => $data,
+    'http' => [
+        'method'=> 'POST',
+        'header'=> 'Content-type: application/json; charset=UTF-8',
+        'content' => $data
     ]
 ];
 
-//　ストリームコンテクストオプションを作成
+// ストリームコンテキストの作成
 $context = stream_context_create($options);
 
 // POST
-$contents = file_get_contents('http://localhost/api/receive.php', false, $context);
+$contents = file_get_contents('http://localhost/myapps/JsonTest/receive.php', false, $context);
+//$contents = file_get_contents('http://enin-world.sakura.ne.jp/test_php/json/receive.php', false, $context);
 
-// 受信レスポンスの表示
+// receive.php のレスポンスを表示
 echo $contents;
